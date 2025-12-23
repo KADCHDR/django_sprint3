@@ -78,11 +78,13 @@ class Post(PublishedAndCreatedModel):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
+        related_name='posts',
         verbose_name='Автор публикации'
     )
     location = models.ForeignKey(
         Location,
         on_delete=models.SET_NULL,
+        related_name='posts',
         null=True,
         blank=True,
         verbose_name='Местоположение'
@@ -90,6 +92,7 @@ class Post(PublishedAndCreatedModel):
     category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
+        related_name='posts',
         null=True,
         verbose_name='Категория'
     )
