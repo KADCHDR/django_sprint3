@@ -1,9 +1,14 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
 
-def about_page(request):
-    return render(request, "pages/about.html")
+def about(request: HttpRequest) -> HttpResponse:
+    """Отображает страницу 'О сайте'."""
+    template_name = 'pages/about.html'
+    return render(request, template_name)
 
 
-def rules_page(request):
-    return render(request, "pages/rules.html")
+def rules(request: HttpRequest) -> HttpResponse:
+    """Отображает страницу с правилами сайта."""
+    template_name = 'pages/rules.html'
+    return render(request, template_name)

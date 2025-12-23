@@ -1,38 +1,42 @@
 from django.contrib import admin
-from .models import Category, Location, Post
 
+from blog.models import Category, Location, Post
 
-# Register your models here.
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("title", "slug", "is_published", "created_at")
-    prepopulated_fields = {"slug": ("title",)}
-    list_editable = ("is_published",)
-    readonly_fields = ("created_at",)
-    fieldsets = (
-        (None, {"fields": ("title", "description", "slug")}),
-        ("Дополнительно", {"fields": ("is_published", "created_at")}),
-    )
-
-
-@admin.register(Location)
-class LocationAdmin(admin.ModelAdmin):
-    list_display = ("name", "is_published", "created_at")
-    list_editable = ("is_published",)
-    readonly_fields = ("created_at",)
+admin.site.empty_value_display = 'Не задано'
 
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = (
-        "title",
-        "author",
-        "pub_date",
-        "is_published",
-        "category",
-        "location",
+        'title',
+        'pub_date',
+        'author',
+        'location',
+        'category',
+        'is_published'
     )
-    list_editable = ("is_published",)
-    list_filter = ("is_published", "pub_date", "category")
-    search_fields = ("title", "text")
-    readonly_fields = ("created_at",)
+    list_editable = ('is_published',)
+    search_fields = (
+        'author__username',
+        'location__name',
+        'category__title'
+    )
+
+
+@admin.register(Location)
+class LocationAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'is_published'
+    )
+    list_editable = ('is_published',)
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = (
+        'title',
+        'slug',
+        'is_published'
+    )
+    list_editable = ('is_published',)
