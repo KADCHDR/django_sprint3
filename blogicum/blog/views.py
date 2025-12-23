@@ -29,8 +29,5 @@ def category_view(request, cat_slug):
         category=category, pub_date__lte=now(), is_published=True
     ).order_by("-pub_date")
     return render(
-    request,
-    "blog/category.html",
-    {"post_list": posts, "category": category},
-)
-
+        request, "blog/category.html", {"post_list": posts, "category": category}
+    )
