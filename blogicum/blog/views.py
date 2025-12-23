@@ -37,9 +37,7 @@ def category_posts(request: HttpRequest, category_slug: str) -> HttpResponse:
         slug=category_slug,
         is_published=True
     )
-    post_list = get_published_posts().filter(
-        category=requested_category
-    )
+    post_list = requested_category.posts.all()
     context = {
         'category': requested_category,
         'post_list': post_list
